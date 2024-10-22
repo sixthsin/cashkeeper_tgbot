@@ -7,6 +7,8 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
+var backButton = tgbotapi.NewInlineKeyboardButtonURL("/back", "/back")
+
 func HandleCommand(
 	ctx context.Context,
 	bot *tgbotapi.BotAPI,
@@ -28,6 +30,7 @@ func HandleCommand(
 		dataChan := make(chan string)
 		waitingUsers[update.Message.From.ID] = dataChan
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgEnterCatrgoryData)
+		msg.ReplyMarkup = backButton
 		bot.Send(msg)
 
 		data := <-dataChan
@@ -39,6 +42,7 @@ func HandleCommand(
 		dataChan := make(chan string)
 		waitingUsers[update.Message.From.ID] = dataChan
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgCategoryDelete)
+		msg.ReplyMarkup = backButton
 		bot.Send(msg)
 
 		data := <-dataChan
@@ -52,8 +56,8 @@ func HandleCommand(
 	case update.Message.Text == AddExpensesCmd: // обработка команды /add_expenses
 		dataChan := make(chan string)
 		waitingUsers[update.Message.From.ID] = dataChan
-
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgEnterExpensesData)
+		msg.ReplyMarkup = backButton
 		bot.Send(msg)
 
 		data := <-dataChan
