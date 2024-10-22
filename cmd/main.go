@@ -40,27 +40,27 @@ func main() {
 	cmdCfg := tgbotapi.NewSetMyCommands(
 		tgbotapi.BotCommand{
 			Command:     telegram.StartCmd,
-			Description: "🚀Запуск бота",
+			Description: telegram.DescCmdStart,
 		},
 		tgbotapi.BotCommand{
 			Command:     telegram.HelpCmd,
-			Description: "💻Узнать список всех команд",
+			Description: telegram.DescCmdHelp,
 		},
 		tgbotapi.BotCommand{
 			Command:     telegram.AddCategoryCmd,
-			Description: "🆕Добавить новую категорию",
+			Description: telegram.DescCmdAddCategory,
 		},
 		tgbotapi.BotCommand{
 			Command:     telegram.GetCategoriesListCmd,
-			Description: "📋Получить список Ваших категорий",
+			Description: telegram.DescCmdGetCategoriesList,
 		},
 		tgbotapi.BotCommand{
 			Command:     telegram.AddExpensesCmd,
-			Description: "📝Добавить траты в существующую категорию",
+			Description: telegram.DescCmdAddExpenses,
 		},
 		tgbotapi.BotCommand{
 			Command:     telegram.DeleteCategoryCmd,
-			Description: "🆑Удалить категорию",
+			Description: telegram.DescCmdDeleteCategory,
 		},
 	)
 
