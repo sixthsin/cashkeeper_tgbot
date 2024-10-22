@@ -7,7 +7,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-const envPath = "D:/Dev/gotgbot/.env"
+const envPath = "D:/Dev/cashkeeper_tgbot/.env"
 
 func BotToken() string {
 	err := godotenv.Load(envPath)
