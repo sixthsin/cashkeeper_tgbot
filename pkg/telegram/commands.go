@@ -19,6 +19,7 @@ func sendError(
 ) {
 	log.Printf("Error adding user: %v", err)
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, errMsgDefault+errMsgDeny)
+	msg.ReplyMarkup = keyboard
 	bot.Send(msg)
 }
 
@@ -66,6 +67,7 @@ func addCategory(
 
 	if exists {
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, errMsgAlreadyUsed+errMsgDeny)
+		msg.ReplyMarkup = keyboard
 		bot.Send(msg)
 		return
 	}
@@ -78,6 +80,7 @@ func addCategory(
 	}
 
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgSuccess)
+	msg.ReplyMarkup = keyboard
 	bot.Send(msg)
 }
 
@@ -101,6 +104,7 @@ func deleteCategory(ctx context.Context,
 
 	if !isExists {
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, errMsgUnknownTitle+errMsgDeny)
+		msg.ReplyMarkup = keyboard
 		bot.Send(msg)
 		return
 	}
@@ -113,6 +117,7 @@ func deleteCategory(ctx context.Context,
 	}
 
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgSuccess)
+	msg.ReplyMarkup = keyboard
 	bot.Send(msg)
 }
 
@@ -174,6 +179,7 @@ func addExpenses(
 
 	if !isExists {
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, errMsgUnknownTitle+errMsgDeny)
+		msg.ReplyMarkup = keyboard
 		bot.Send(msg)
 		return
 	}
@@ -186,5 +192,6 @@ func addExpenses(
 	}
 
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgSuccess)
+	msg.ReplyMarkup = keyboard
 	bot.Send(msg)
 }

@@ -7,7 +7,23 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
-var backButton = tgbotapi.NewInlineKeyboardButtonURL("/back", "/back")
+var (
+	backButton = tgbotapi.NewReplyKeyboard(
+		[]tgbotapi.KeyboardButton{
+			tgbotapi.NewKeyboardButton(BackCmd),
+		})
+
+	keyboard = tgbotapi.NewReplyKeyboard(
+		[]tgbotapi.KeyboardButton{
+			tgbotapi.NewKeyboardButton(AddCategoryCmd),
+			tgbotapi.NewKeyboardButton(DeleteCategoryCmd),
+		},
+		[]tgbotapi.KeyboardButton{
+			tgbotapi.NewKeyboardButton(AddExpensesCmd),
+			tgbotapi.NewKeyboardButton(GetCategoriesListCmd),
+		},
+	)
+)
 
 func HandleCommand(
 	ctx context.Context,
@@ -20,10 +36,12 @@ func HandleCommand(
 	switch {
 	case update.Message.Text == StartCmd: // обработка команды /start
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgStart)
+		msg.ReplyMarkup = keyboard
 		bot.Send(msg)
 
 	case update.Message.Text == HelpCmd: // обработка команды /help
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgHelp)
+		msg.ReplyMarkup = keyboard
 		bot.Send(msg)
 
 	case update.Message.Text == AddCategoryCmd: // обработка команды /add_category
@@ -66,6 +84,7 @@ func HandleCommand(
 	case isWaiting && update.Message.Text == BackCmd: // обработка команды /back
 		delete(waitingUsers, update.Message.From.ID)
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, errMsgDeny)
+		msg.ReplyMarkup = keyboard
 		bot.Send(msg)
 
 	case isWaiting:
@@ -73,6 +92,7 @@ func HandleCommand(
 
 	default:
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, errMsgUnknownCmd)
+		msg.ReplyMarkup = keyboard
 		bot.Send(msg)
 	}
 }

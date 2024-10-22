@@ -40,31 +40,27 @@ func main() {
 	cmdCfg := tgbotapi.NewSetMyCommands(
 		tgbotapi.BotCommand{
 			Command:     telegram.StartCmd,
-			Description: "Запуск бота",
+			Description: "🚀Запуск бота",
 		},
 		tgbotapi.BotCommand{
 			Command:     telegram.HelpCmd,
-			Description: "Узнать список всех команд",
+			Description: "💻Узнать список всех команд",
 		},
 		tgbotapi.BotCommand{
 			Command:     telegram.AddCategoryCmd,
-			Description: "Добавить новую категорию",
+			Description: "🆕Добавить новую категорию",
 		},
 		tgbotapi.BotCommand{
 			Command:     telegram.GetCategoriesListCmd,
-			Description: "Получить список Ваших категорий",
+			Description: "📋Получить список Ваших категорий",
 		},
 		tgbotapi.BotCommand{
 			Command:     telegram.AddExpensesCmd,
-			Description: "Добавить траты в существующую категорию",
-		},
-		tgbotapi.BotCommand{
-			Command:     telegram.GetCategoriesListCmd,
-			Description: "Получить список Ваших категорий",
+			Description: "📝Добавить траты в существующую категорию",
 		},
 		tgbotapi.BotCommand{
 			Command:     telegram.DeleteCategoryCmd,
-			Description: "Удалить категорию",
+			Description: "🆑Удалить категорию",
 		},
 	)
 
@@ -72,6 +68,8 @@ func main() {
 
 	for update := range updates {
 		if update.Message != nil && update.Message.Text != "" {
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
+			bot.Send(msg)
 			ctx := context.Background()
 			go telegram.HandleCommand(ctx, bot, update, waitingUsers, s)
 		}
