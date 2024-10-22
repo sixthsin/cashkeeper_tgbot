@@ -46,22 +46,6 @@ func main() {
 			Command:     telegram.HelpCmd,
 			Description: telegram.DescCmdHelp,
 		},
-		tgbotapi.BotCommand{
-			Command:     telegram.AddCategoryCmd,
-			Description: telegram.DescCmdAddCategory,
-		},
-		tgbotapi.BotCommand{
-			Command:     telegram.GetCategoriesListCmd,
-			Description: telegram.DescCmdGetCategoriesList,
-		},
-		tgbotapi.BotCommand{
-			Command:     telegram.AddExpensesCmd,
-			Description: telegram.DescCmdAddExpenses,
-		},
-		tgbotapi.BotCommand{
-			Command:     telegram.DeleteCategoryCmd,
-			Description: telegram.DescCmdDeleteCategory,
-		},
 	)
 
 	bot.Send(cmdCfg)
