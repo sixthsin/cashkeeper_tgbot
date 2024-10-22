@@ -37,6 +37,38 @@ func main() {
 	u.Timeout = 60
 	updates := bot.GetUpdatesChan(u)
 	waitingUsers := make(map[int64]chan string)
+	cmdCfg := tgbotapi.NewSetMyCommands(
+		tgbotapi.BotCommand{
+			Command:     telegram.StartCmd,
+			Description: "Запуск бота",
+		},
+		tgbotapi.BotCommand{
+			Command:     telegram.HelpCmd,
+			Description: "Узнать список всех команд",
+		},
+		tgbotapi.BotCommand{
+			Command:     telegram.AddCategoryCmd,
+			Description: "Добавить новую категорию",
+		},
+		tgbotapi.BotCommand{
+			Command:     telegram.GetCategoriesListCmd,
+			Description: "Получить список Ваших категорий",
+		},
+		tgbotapi.BotCommand{
+			Command:     telegram.AddExpensesCmd,
+			Description: "Добавить траты в существующую категорию",
+		},
+		tgbotapi.BotCommand{
+			Command:     telegram.GetCategoriesListCmd,
+			Description: "Получить список Ваших категорий",
+		},
+		tgbotapi.BotCommand{
+			Command:     telegram.DeleteCategoryCmd,
+			Description: "Удалить категорию",
+		},
+	)
+
+	bot.Send(cmdCfg)
 
 	for update := range updates {
 		if update.Message != nil && update.Message.Text != "" {

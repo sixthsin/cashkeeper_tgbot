@@ -16,15 +16,15 @@ func HandleCommand(
 ) {
 	_, isWaiting := waitingUsers[update.Message.From.ID]
 	switch {
-	case update.Message.Text == startCmd: // обработка команды /start
+	case update.Message.Text == StartCmd: // обработка команды /start
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgStart)
 		bot.Send(msg)
 
-	case update.Message.Text == helpCmd: // обработка команды /help
+	case update.Message.Text == HelpCmd: // обработка команды /help
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgHelp)
 		bot.Send(msg)
 
-	case update.Message.Text == addCategoryCmd: // обработка команды /add_category
+	case update.Message.Text == AddCategoryCmd: // обработка команды /add_category
 		dataChan := make(chan string)
 		waitingUsers[update.Message.From.ID] = dataChan
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgEnterCatrgoryData)
@@ -35,7 +35,7 @@ func HandleCommand(
 
 		delete(waitingUsers, update.Message.From.ID)
 
-	case update.Message.Text == deleteCategoryCmd: // обработка команды /delete_category
+	case update.Message.Text == DeleteCategoryCmd: // обработка команды /delete_category
 		dataChan := make(chan string)
 		waitingUsers[update.Message.From.ID] = dataChan
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, msgCategoryDelete)
@@ -46,10 +46,10 @@ func HandleCommand(
 
 		delete(waitingUsers, update.Message.From.ID)
 
-	case update.Message.Text == getCategoriesListCmd: // обработка команды /my_categories
+	case update.Message.Text == GetCategoriesListCmd: // обработка команды /my_categories
 		go getCategoriesList(ctx, bot, update, s)
 
-	case update.Message.Text == addExpensesCmd: // обработка команды /add_expenses
+	case update.Message.Text == AddExpensesCmd: // обработка команды /add_expenses
 		dataChan := make(chan string)
 		waitingUsers[update.Message.From.ID] = dataChan
 
@@ -59,7 +59,7 @@ func HandleCommand(
 		data := <-dataChan
 		go addExpenses(ctx, bot, update, s, data)
 
-	case isWaiting && update.Message.Text == backCmd: // обработка команды /back
+	case isWaiting && update.Message.Text == BackCmd: // обработка команды /back
 		delete(waitingUsers, update.Message.From.ID)
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, errMsgDeny)
 		bot.Send(msg)

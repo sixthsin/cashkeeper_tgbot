@@ -1,14 +1,14 @@
 package telegram
 
 const (
-	startCmd             = "/start"
-	helpCmd              = "/help"
-	addCategoryCmd       = "/add_category"
-	getCategoriesListCmd = "/my_categories"
-	addExpensesCmd       = "/add_expenses"
-	backCmd              = "/back"
-	deleteCategoryCmd    = "/delete_category"
-	deleteAllCmd         = "/delete_all"
+	StartCmd             = "/start"
+	HelpCmd              = "/help"
+	AddCategoryCmd       = "/add_category"
+	GetCategoriesListCmd = "/my_categories"
+	AddExpensesCmd       = "/add_expenses"
+	BackCmd              = "/back"
+	DeleteCategoryCmd    = "/delete_category"
+	DeleteAllCmd         = "/delete_all"
 
 	msgYes               = "ДА"
 	msgNo                = "НЕТ"
